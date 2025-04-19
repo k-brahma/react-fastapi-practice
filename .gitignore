@@ -4,16 +4,12 @@ __pycache__/
 *$py.class
 
 # Virtual environment
-/backend/venv/
 .venv/
 venv/
 ENV/
 env/
 
 # Database
-/backend/*.db
-/backend/*.sqlite
-/backend/*.sqlite3
 
 # IDEs and editors
 .vscode/
@@ -25,8 +21,6 @@ env/
 *.sublime-*
 
 # Node.js
-/frontend/node_modules/
-/frontend/dist/
 /frontend/.pnp*
 /frontend/.yarn/*
 !/frontend/.yarn/patches/

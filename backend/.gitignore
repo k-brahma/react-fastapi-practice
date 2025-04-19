@@ -1,0 +1,31 @@
+# Virtual environment
+venv/
+.venv/
+env/
+ENV/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Testing
+.pytest_cache/
+.coverage*
+htmlcov/
+
+# Environment variables
+.env*
+
+# IDE / Editor specific (optional, can be in root .gitignore only)
+# .vscode/
+# .idea/
+
+# OS specific (optional, can be in root .gitignore only)
+# .DS_Store
+# Thumbs.db 

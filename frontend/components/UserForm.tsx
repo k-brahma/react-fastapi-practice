@@ -25,7 +25,7 @@ export function UserForm({ onSubmit }: UserFormProps) {
   };
   
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
+    <form noValidate onSubmit={handleSubmit(handleFormSubmit)}>
       <h2>新規ユーザー追加</h2>
       
       <div>

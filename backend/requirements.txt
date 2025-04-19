@@ -1,6 +1,7 @@
 fastapi
 uvicorn[standard]
 sqlalchemy
+pytest
 python-dotenv
 pydantic[email]
 passlib[bcrypt] 

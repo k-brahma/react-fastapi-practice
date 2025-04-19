@@ -93,6 +93,8 @@ Now you can access the application in your browser at the frontend URL.
 
 ## テストの実行
 
+### バックエンド(FastAPI)
+
 バックエンドのテストを実行するには、プロジェクトのルートディレクトリで以下のコマンドを実行します。
 
 ```bash
@@ -105,4 +107,21 @@ pytest backend
 pip install pytest httpx
 # または、requirements.txt に追加してインストール
 # pip install -r backend/requirements.txt
-``` 
+```
+
+### フロントエンド (React)
+
+フロントエンドのユニットテストとコンポーネントテストを実行するには、まず `frontend` ディレクトリに移動し、以下のコマンドを実行します。
+
+```bash
+cd frontend
+npm test
+```
+
+テストカバレッジレポートを生成するには、以下のコマンドを実行します。
+
+```bash
+npm run coverage
+```
+
+カバレッジレポートは `frontend/coverage/index.html` に HTML 形式で出力されます。 

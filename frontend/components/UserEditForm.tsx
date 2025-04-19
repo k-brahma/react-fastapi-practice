@@ -22,12 +22,16 @@ export function UserEditForm({ userId, onSubmit, onCancel }: UserEditFormProps) 
       is_active: user.is_active
     } : undefined
   });
-  
+
+  const handleFormSubmit = (data: Omit<User, 'id'> /*, event?: React.BaseSyntheticEvent */) => {
+    onSubmit(data);
+  };
+
   if (isLoading) return <div>ローディング中...</div>;
   if (!user) return <div>ユーザーが見つかりません</div>;
   
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
       <div>
         <label htmlFor="edit-name">名前:</label>
         <input
