@@ -11,16 +11,16 @@ interface UserFormData {
 }
 
 interface UserFormProps {
-  // main.tsx の handleSubmit に合わせる (emailとpasswordのみ要求)
-  onSubmit: (data: { email: string; password: string }) => void;
+  // onSubmit に name も含めるように型を変更
+  onSubmit: (data: { name: string; email: string; password: string }) => void;
 }
 
 export function UserForm({ onSubmit }: UserFormProps) {
   const { register, handleSubmit, formState: { errors }, reset } = useForm<UserFormData>();
   
   const handleFormSubmit = (data: UserFormData) => {
-    // onSubmitには email と password のみ渡す
-    onSubmit({ email: data.email, password: data.password });
+    // onSubmit に name, email, password を渡す
+    onSubmit({ name: data.name, email: data.email, password: data.password });
     reset(); // フォームをリセット
   };
   

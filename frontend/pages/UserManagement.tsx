@@ -43,15 +43,16 @@ export default function UserManagement() {
   });
 
   const filteredUsers = users.filter(user => {
+    const searchTermLower = filter.searchTerm.toLowerCase();
     const matchesSearchTerm = 
-      user.name.toLowerCase().includes(filter.searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(filter.searchTerm.toLowerCase());
-    const matchesActiveFilter = !filter.showOnlyActive || user.isActive;
+      (user.name?.toLowerCase().includes(searchTermLower) ?? false) ||
+      (user.email?.toLowerCase().includes(searchTermLower) ?? false);
+    const matchesActiveFilter = !filter.showOnlyActive || user.is_active;
     
     return matchesSearchTerm && matchesActiveFilter;
   });
 
-  const handleAddUser = (userData: Omit<User, 'id'>) => {
+  const handleAddUser = (userData: { name: string; email: string; password: string; }) => {
     createUserMutation.mutate(userData);
   };
 
@@ -106,8 +107,8 @@ export default function UserManagement() {
             {filteredUsers.map(user => (
               <li key={user.id}>
                 <div>
-                  <strong>{user.name}</strong> ({user.email})
-                  {user.isActive ? ' - アクティブ' : ' - 非アクティブ'}
+                  <strong>name: {user.name ?? ''}</strong> email: ({user.email})
+                  {user.is_active ? ' - アクティブ' : ' - 非アクティブ'}
                 </div>
                 <div>
                   <button onClick={() => setSelectedUserId(user.id)}>

@@ -12,7 +12,7 @@ export const userApi = {
     const response = await axios.get(`${API_BASE_URL}/users/${id}`);
     return response.data;
   },
-  createUser: async (user: { email: string; password: string }) => {
+  createUser: async (user: { name: string; email: string; password: string }) => {
     const response = await axios.post(`${API_BASE_URL}/users/`, user);
     return response.data;
   },

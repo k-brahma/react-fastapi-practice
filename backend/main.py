@@ -62,8 +62,7 @@ def delete_user_endpoint(user_id: int, db: Session = Depends(get_db)):
 origins = [
     "http://localhost",
     "http://localhost:5173",  # Viteのデフォルトポート
-    "http://localhost:3000",  # create-react-app のデフォルトポートなど
-    # 必要に応じて他のオリジンを追加
+    # "http://localhost:3000",  # create-react-app のデフォルトポートなど
 ]
 app.add_middleware(
     CORSMiddleware,

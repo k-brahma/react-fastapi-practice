@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import axios from 'axios'; // axiosをインポート
 import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'; // React Query をインポート
+import {
   BrowserRouter,
   Routes,
   Route,
@@ -9,9 +13,10 @@ import {
   Navigate // リダイレクト用
 } from 'react-router-dom';
 import { UserForm } from '../components/UserForm'; // 仮にUserFormを直接表示
-import { UserList } from '../components/UserList'; // UserList をインポート
+// import { UserList } from '../components/UserList'; // UserList のインポートをコメントアウト
 import { UserDetail } from '../components/UserDetail'; // UserDetail をインポート
 import { UserEdit } from '../components/UserEdit';   // UserEdit をインポート
+import UserManagement from '../pages/UserManagement'; // UserManagement をインポート
 import { userApi } from '../api/userApi'; // userApiをインポート
 import { User } from '../types/user'; // User型をインポート
 import './index.css'; // 必要であればCSSファイルをインポート
@@ -75,7 +80,8 @@ function App() {
 
       <main>
         <Routes>
-          <Route path="/users" element={<UserList />} />
+          {/* /users パスで UserManagement を表示 */}
+          <Route path="/users" element={<UserManagement />} />
           <Route path="/users/new" element={<UserForm onSubmit={handleUserCreateSubmit} />} />
           {/* 詳細ページと編集ページのルートを追加 */}
           <Route path="/users/:userId" element={<UserDetail />} />
@@ -88,8 +94,14 @@ function App() {
   );
 }
 
+// QueryClientのインスタンスを作成
+const queryClient = new QueryClient();
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    {/* App全体をQueryClientProviderでラップ */}
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </React.StrictMode>,
 ); 

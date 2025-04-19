@@ -19,7 +19,7 @@ export function UserEditForm({ userId, onSubmit, onCancel }: UserEditFormProps) 
     values: user ? {
       name: user.name,
       email: user.email,
-      isActive: user.isActive
+      is_active: user.is_active
     } : undefined
   });
   
@@ -56,7 +56,7 @@ export function UserEditForm({ userId, onSubmit, onCancel }: UserEditFormProps) 
         <label>
           <input
             type="checkbox"
-            {...register("isActive")}
+            {...register("is_active")}
           />
           アクティブ
         </label>
