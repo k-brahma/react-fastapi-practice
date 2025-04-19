@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // 新規作成ページへのリンク用
+import axios from 'axios';
 import { userApi } from '../api/userApi';
 import { User } from '../types/user'; // User型をインポート
 
@@ -35,7 +36,7 @@ export function UserList() {
     try {
       await userApi.deleteUser(id);
       // 削除成功後、リストからユーザーを削除してUIを更新
-      setUsers(currentUsers => currentUsers.filter(user => user.id !== id));
+      setUsers((currentUsers: User[]) => currentUsers.filter((user: User) => user.id !== id));
       alert(`ID: ${id} のユーザーを削除しました。`);
     } catch (err) {
       console.error('Failed to delete user:', err);
@@ -55,29 +56,49 @@ export function UserList() {
   return (
     <div>
       <h2>ユーザー一覧</h2>
-      <Link to="/users/new">新規ユーザー追加</Link> {/* 作成ページへのリンク */} 
+      <Link
+        to="/users/new"
+        className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4"
+      >
+        新規ユーザー追加
+      </Link> {/* 作成ページへのリンク */}
       {users.length === 0 ? (
         <p>ユーザーが見つかりません。</p>
       ) : (
-        <table border={1} style={{ marginTop: '1em', borderCollapse: 'collapse' }}>
+        <table className="mt-4 w-full table-auto border-collapse border border-gray-300">
           <thead>
-            <tr>
-              <th>ID</th>
-              <th>Email</th>
-              <th>Active</th>
-              <th>操作</th>
+            <tr className="bg-gray-100">
+              <th className="border border-gray-300 px-4 py-2 text-left">ID</th>
+              <th className="border border-gray-300 px-4 py-2 text-left">Email</th>
+              <th className="border border-gray-300 px-4 py-2 text-left">Active</th>
+              <th className="border border-gray-300 px-4 py-2 text-left">操作</th>
             </tr>
           </thead>
           <tbody>
-            {users.map(user => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.email}</td>
-                <td>{user.is_active ? 'Yes' : 'No'}</td>
-                <td>
-                  <Link to={`/users/${user.id}`}>詳細</Link> |
-                  <Link to={`/users/${user.id}/edit`}>編集</Link> |
-                  <button onClick={() => handleDelete(user.id)} style={{ marginLeft: '5px' }}>削除</button>
+            {users.map((user: User) => (
+              <tr key={user.id} className="hover:bg-gray-50">
+                <td className="border border-gray-300 px-4 py-2">{user.id}</td>
+                <td className="border border-gray-300 px-4 py-2">{user.email}</td>
+                <td className="border border-gray-300 px-4 py-2">{user.is_active ? 'Yes' : 'No'}</td>
+                <td className="border border-gray-300 px-4 py-2 space-x-1">
+                  <Link 
+                    to={`/users/${user.id}`} 
+                    className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded text-xs"
+                  >
+                    詳細
+                  </Link>
+                  <Link 
+                    to={`/users/${user.id}/edit`} 
+                    className="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded text-xs"
+                  >
+                    編集
+                  </Link>
+                  <button 
+                    onClick={() => handleDelete(user.id)} 
+                    className="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded text-xs"
+                  >
+                    削除
+                  </button>
                 </td>
               </tr>
             ))}

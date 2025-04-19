@@ -31,20 +31,23 @@ export function UserEditForm({ userId, onSubmit, onCancel }: UserEditFormProps) 
   if (!user) return <div>ユーザーが見つかりません</div>;
   
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <div>
-        <label htmlFor="edit-name">名前:</label>
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="p-4 max-w-md mx-auto bg-white shadow-md rounded-lg">
+      <div className="mb-4">
+        <label htmlFor="edit-name" className="block text-gray-700 text-sm font-bold mb-2">名前:</label>
         <input
           id="edit-name"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           {...register("name", { required: "名前は必須です" })}
         />
-        {errors.name && <p>{errors.name.message}</p>}
+        {errors.name && <p className="text-red-500 text-xs italic mt-1">{errors.name.message}</p>}
       </div>
       
-      <div>
-        <label htmlFor="edit-email">メールアドレス:</label>
+      <div className="mb-4">
+        <label htmlFor="edit-email" className="block text-gray-700 text-sm font-bold mb-2">メールアドレス:</label>
         <input
           id="edit-email"
+          type="email"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           {...register("email", {
             required: "メールアドレスは必須です",
             pattern: {
@@ -53,21 +56,37 @@ export function UserEditForm({ userId, onSubmit, onCancel }: UserEditFormProps) 
             }
           })}
         />
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && <p className="text-red-500 text-xs italic mt-1">{errors.email.message}</p>}
       </div>
       
-      <div>
-        <label>
+      <div className="mb-6">
+        <label className="flex items-center">
           <input
             type="checkbox"
+            className="mr-2 leading-tight"
             {...register("is_active")}
           />
-          アクティブ
+          <span className="text-sm">
+            アクティブ
+          </span>
         </label>
       </div>
       
-      <button type="submit">更新</button>
-      <button type="button" onClick={onCancel}>キャンセル</button>
+      <div className="flex items-center justify-between space-x-2">
+        <button
+          type="submit"
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-1/2"
+        >
+          更新
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-1/2"
+        >
+          キャンセル
+        </button>
+      </div>
     </form>
   );
 } 

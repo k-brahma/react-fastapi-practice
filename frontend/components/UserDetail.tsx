@@ -62,15 +62,34 @@ export function UserDetail() {
   }
 
   return (
-    <div>
-      <h2>ユーザー詳細 (ID: {user.id})</h2>
-      <p><strong>Email:</strong> {user.email}</p>
-      <p><strong>Active:</strong> {user.is_active ? 'Yes' : 'No'}</p>
-      {/* ここに他のユーザー情報を表示する場合は追加 */}
+    <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">ユーザー詳細 (ID: {user.id})</h2>
+      <div className="mb-4">
+        <p className="mb-2"><strong>Email:</strong> {user.email}</p>
+        <p className="mb-2"><strong>Active:</strong> {user.is_active ? 'Yes' : 'No'}</p>
+        {/* ここに他のユーザー情報を表示する場合は追加 */}
+      </div>
       
-      <Link to={`/users/${user.id}/edit`}>編集</Link> |
-      <button onClick={handleDelete} style={{ marginLeft: '5px' }}>削除</button> |
-      <Link to="/users" style={{ marginLeft: '5px' }}>一覧に戻る</Link>
+      <div className="flex space-x-2">
+        <Link 
+          to={`/users/${user.id}/edit`} 
+          className="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        >
+          編集
+        </Link>
+        <button 
+          onClick={handleDelete} 
+          className="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        >
+          削除
+        </button>
+        <Link 
+          to="/users" 
+          className="inline-block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+        >
+          一覧に戻る
+        </Link>
+      </div>
     </div>
   );
 } 

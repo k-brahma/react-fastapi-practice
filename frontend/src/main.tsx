@@ -28,9 +28,8 @@ import './index.css'; // 必要であればCSSファイルをインポート
 // }
 
 // onSubmitハンドラー: UserFormからデータを受け取り、APIを呼び出す
-// UserFormのonSubmitの型 (Omit<User, 'id'>?) と createUser API (password必須) の
-// 要求が異なるため、UserForm側の修正が必要な可能性が高い。
-const handleUserCreateSubmit = async (formData: { email: string; password?: string }) => {
+// handleUserCreateSubmit の引数型に name を追加
+const handleUserCreateSubmit = async (formData: { name: string; email: string; password?: string }) => {
   // createUserにはpasswordが必須
   if (!formData.password) {
     alert('パスワードを入力してください。');
@@ -39,8 +38,8 @@ const handleUserCreateSubmit = async (formData: { email: string; password?: stri
   }
 
   try {
-    // APIへ渡すデータを作成 (emailとpasswordのみ)
-    const userData = { email: formData.email, password: formData.password };
+    // APIへ渡すデータを作成 (name, email, password)
+    const userData = { name: formData.name, email: formData.email, password: formData.password };
     const newUser = await userApi.createUser(userData);
     console.log('User Created:', newUser);
     alert(`ユーザー「${newUser.email}」が作成されました。`);
@@ -68,20 +67,29 @@ const handleUserCreateSubmit = async (formData: { email: string; password?: stri
 function App() {
   return (
     <BrowserRouter>
-      <header>
+      {/* ヘッダーに Tailwind CSS クラスを追加 */} 
+      <header className="p-4 border-b border-gray-200">
         <nav>
-          <ul>
-            <li><Link to="/users">ユーザー一覧</Link></li>
-            <li><Link to="/users/new">新規ユーザー追加</Link></li>
+          {/* ナビゲーションリストのスタイル */} 
+          <ul className="flex space-x-4"> 
+            <li>
+              {/* リンクのスタイル */}
+              <Link to="/users" className="text-blue-500 hover:text-blue-700 font-semibold">ユーザー一覧</Link>
+            </li>
+            <li>
+              <Link to="/users/new" className="text-blue-500 hover:text-blue-700 font-semibold">新規ユーザー追加</Link>
+            </li>
           </ul>
         </nav>
-        <hr />
+        {/* <hr /> は border-b で代替 */}
       </header>
 
-      <main>
+      {/* メインコンテンツエリアにパディングを追加 */} 
+      <main className="p-4"> 
         <Routes>
           {/* /users パスで UserManagement を表示 */}
           <Route path="/users" element={<UserManagement />} />
+          {/* UserForm の onSubmit に渡す型が handleUserCreateSubmit と一致するように調整 */} 
           <Route path="/users/new" element={<UserForm onSubmit={handleUserCreateSubmit} />} />
           {/* 詳細ページと編集ページのルートを追加 */}
           <Route path="/users/:userId" element={<UserDetail />} />

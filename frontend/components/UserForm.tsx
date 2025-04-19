@@ -25,23 +25,25 @@ export function UserForm({ onSubmit }: UserFormProps) {
   };
   
   return (
-    <form noValidate onSubmit={handleSubmit(handleFormSubmit)}>
-      <h2>新規ユーザー追加</h2>
+    <form noValidate onSubmit={handleSubmit(handleFormSubmit)} className="p-4 max-w-md mx-auto bg-white shadow-md rounded-lg">
+      <h2 className="text-xl font-bold mb-6 text-center">新規ユーザー追加</h2>
       
-      <div>
-        <label htmlFor="name">名前:</label>
+      <div className="mb-4">
+        <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">名前:</label>
         <input
           id="name"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           {...register("name", { required: "名前は必須です" })}
         />
-        {errors.name && <p>{errors.name.message}</p>}
+        {errors.name && <p className="text-red-500 text-xs italic mt-1">{errors.name.message}</p>}
       </div>
       
-      <div>
-        <label htmlFor="email">メールアドレス:</label>
+      <div className="mb-4">
+        <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">メールアドレス:</label>
         <input
           id="email"
           type="email"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           {...register("email", {
             required: "メールアドレスは必須です",
             pattern: {
@@ -50,30 +52,41 @@ export function UserForm({ onSubmit }: UserFormProps) {
             }
           })}
         />
-        {errors.email && <p>{errors.email.message}</p>}
+        {errors.email && <p className="text-red-500 text-xs italic mt-1">{errors.email.message}</p>}
       </div>
       
-      <div>
-        <label htmlFor="password">パスワード:</label>
+      <div className="mb-6">
+        <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">パスワード:</label>
         <input
           id="password"
           type="password"
+          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
           {...register("password", { required: "パスワードは必須です" })}
         />
-        {errors.password && <p>{errors.password.message}</p>}
+        {errors.password && <p className="text-red-500 text-xs italic mt-1">{errors.password.message}</p>}
       </div>
       
-      <div>
-        <label>
+      <div className="mb-6">
+        <label className="flex items-center">
           <input
             type="checkbox"
+            className="mr-2 leading-tight"
             {...register("is_active")}
           />
-          アクティブ
+          <span className="text-sm">
+            アクティブ
+          </span>
         </label>
       </div>
       
-      <button type="submit">追加</button>
+      <div className="flex items-center justify-between">
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+        >
+          追加
+        </button>
+      </div>
     </form>
   );
 } 
