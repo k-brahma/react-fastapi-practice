@@ -90,3 +90,19 @@ react-practice/
     The frontend application will be running at `http://localhost:5173` (or another port if 5173 is busy).
 
 Now you can access the application in your browser at the frontend URL. 
+
+## テストの実行
+
+バックエンドのテストを実行するには、プロジェクトのルートディレクトリで以下のコマンドを実行します。
+
+```bash
+pytest backend
+```
+
+テストの実行には `pytest` と `httpx` が必要です。インストールされていない場合は、以下のコマンドでインストールしてください。
+
+```bash
+pip install pytest httpx
+# または、requirements.txt に追加してインストール
+# pip install -r backend/requirements.txt
+``` 
