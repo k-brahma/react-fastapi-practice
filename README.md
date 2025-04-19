@@ -1,0 +1,92 @@
+# React + FastAPI CRUD Example
+
+This is an experimental project demonstrating a simple CRUD application using React for the frontend and FastAPI with SQLite for the backend.
+
+## Project Structure
+
+```
+react-practice/
+├── backend/         # FastAPI application
+│   ├── venv/        # Python virtual environment (ignored)
+│   ├── crud.py
+│   ├── database.py
+│   ├── main.py
+│   ├── models.py
+│   ├── requirements.txt
+│   └── schemas.py
+│   └── sql_app.db   # SQLite database file (ignored)
+├── frontend/        # React application (Vite)
+│   ├── node_modules/ # Node.js dependencies (ignored)
+│   ├── public/
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── userApi.ts
+│   │   ├── components/
+│   │   │   ├── UserDetail.tsx
+│   │   │   ├── UserEdit.tsx
+│   │   │   ├── UserForm.tsx
+│   │   │   └── UserList.tsx
+│   │   ├── types/
+│   │   │   └── user.ts
+│   │   ├── index.css
+│   │   └── main.tsx
+│   ├── index.html
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
+├── .gitignore
+└── README.md
+```
+
+## Setup and Launch
+
+### Backend (FastAPI)
+
+1.  **Navigate to the backend directory:**
+    ```bash
+    cd backend
+    ```
+2.  **Create a Python virtual environment (if not already created):**
+    ```bash
+    python -m venv venv
+    ```
+3.  **Activate the virtual environment:**
+    *   Windows (PowerShell/CMD): `.\venv\Scripts\activate`
+    *   macOS/Linux: `source venv/bin/activate`
+4.  **Install dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+5.  **Navigate back to the project root directory:**
+    ```bash
+    cd ..
+    ```
+6.  **Launch the FastAPI server (from the project root, with venv activated):**
+    ```bash
+    uvicorn backend.main:app --reload
+    ```
+    The backend API will be running at `http://127.0.0.1:8000`.
+    API documentation (Swagger UI) is available at `http://127.0.0.1:8000/docs`.
+
+### Frontend (React)
+
+1.  **Navigate to the frontend directory (in a separate terminal):**
+    ```bash
+    cd frontend
+    ```
+2.  **Install dependencies (if not already installed):**
+    ```bash
+    npm install 
+    # or
+    # yarn install
+    ```
+3.  **Launch the Vite development server:**
+    ```bash
+    npm run dev
+    # or
+    # yarn dev
+    ```
+    The frontend application will be running at `http://localhost:5173` (or another port if 5173 is busy).
+
+Now you can access the application in your browser at the frontend URL. 
